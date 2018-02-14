@@ -1,0 +1,36 @@
+# caesar shift
+def shift (letter, shift_amount):
+    unicode_variable = ord(letter) + shift_amount
+    new_letter = chr(unicode_variable)
+    return new_letter
+
+def encrypt (message, shift_amount):
+    result = ""
+    for letter in message:
+        variable = ord(shift(letter, shift_amount))
+        if variable > 126:
+            new_letter = chr(variable - 126)
+        else:
+            new_letter = chr(variable)
+        result += new_letter
+            
+    return result
+
+def decrypt (message, shift_amount):
+    result = ""
+    for letter in message:
+        result += shift(letter, (-1 * shift_amount))
+    return result
+
+secret_message = "Zebras run fast, and I like cake. This message is completely random."
+encrypted_message = encrypt(secret_message, 3)
+decrypted_message = decrypt(encrypted_message, 3) 
+
+print(secret_message) 
+print(encrypted_message)
+print(decrypted_message) 
+
+with open('test_run.txt', 'w') as f:
+    f.write(secret_message + "\n")
+    f.write(encrypted_message + "\n")
+    f.write(decrypted_message + "\n") 
